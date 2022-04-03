@@ -60,10 +60,10 @@ class Game:
             self.score2 += 1
             print(f"Player 2 wins round, score: {self.score1} - {self.score2} \n")
 
-    def play_game(self):
+    def play_game(self, num_rounds):
         print("Game start!")
-        for round in range(3):  # rounds start from 1
-            print(f"Round {round+1}:")
+        for round in range(num_rounds): 
+            print(f"Round {round+1}:")   # rounds start from 1
             self.play_round()
         if self.score1 == self.score2:
             print("The game is a tie!")
@@ -76,4 +76,4 @@ class Game:
 
 if __name__ == '__main__':
     game = Game(HumanPlayer(), RandomPlayer())
-    game.play_game()
+    game.play_game(3)  # choose number of rounds
