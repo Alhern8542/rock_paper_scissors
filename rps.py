@@ -24,7 +24,7 @@ class RandomPlayer(Player):
 class HumanPlayer(Player):
     def move(self):
         while True:
-            word = input("choose rock, paper, or scissors\n").lower()
+            word = input("choose rock, paper, or scissors:\n").lower()
             if word in ["rock", "paper", "scissors"]:
                 return word
             else:
@@ -37,6 +37,9 @@ def beats(one, two):
             (one == 'paper' and two == 'rock'))
 
 
+#class ReflectPlayer(Player):
+
+#class CyclePlayer(Player):
 class Game:
     def __init__(self, p1, p2):
         self.p1 = p1
@@ -63,7 +66,7 @@ class Game:
     def play_game(self, num_rounds):
         print("Game start!")
         for round in range(num_rounds): 
-            print(f"Round {round+1}:")   # rounds start from 1
+            print(f"Round {round+1}...")   # rounds start from 1
             self.play_round()
         if self.score1 == self.score2:
             print("The game is a tie!")
