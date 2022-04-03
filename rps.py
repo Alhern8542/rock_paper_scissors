@@ -21,6 +21,15 @@ class RandomPlayer(Player):
     def move(self):
         return random.choice(moves)
 
+class HumanPlayer(Player):
+    def move(self):
+        while True:
+            word = input("choose rock, paper, or scissors\n").lower()
+            if word in ["rock", "paper", "scissors"]:
+                return word
+            else:
+                print("Invalid choice, try again")
+
 
 def beats(one, two):
     return ((one == 'rock' and two == 'scissors') or
@@ -66,5 +75,5 @@ class Game:
 
 
 if __name__ == '__main__':
-    game = Game(RandomPlayer(), RandomPlayer())
+    game = Game(HumanPlayer(), RandomPlayer())
     game.play_game()
