@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import numbers
 import random
 
 """This program plays a game of Rock, Paper, Scissors between two Players,
@@ -108,5 +109,6 @@ class Game:
 
 if __name__ == '__main__':
     game = Game(HumanPlayer(), CyclePlayer())
-    rounds = int(input("Choose number of rounds: "))
+    # rounds = int(input("Choose number of rounds: "))
+    rounds = int(valid_input("Choose number of rounds(1-7): ", ["1", "2", "3", "4", "5", "6", "7"]))
     game.play_game(rounds)  # choose number of rounds
