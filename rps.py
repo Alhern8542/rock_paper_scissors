@@ -37,7 +37,16 @@ def beats(one, two):
             (one == 'paper' and two == 'rock'))
 
 
-#class ReflectPlayer(Player):
+class ReflectPlayer(Player):
+    def __init__(self):
+        self.reflect_move = "rock"
+
+    def move(self):
+        return self.reflect_move 
+        
+    def learn(self, my_move, their_move):
+        self.reflect_move = their_move
+
 
 #class CyclePlayer(Player):
 class Game:
@@ -52,8 +61,6 @@ class Game:
         move2 = self.p2.move()
         print(f"Player 1: {move1}  Player 2: {move2}")
         player1_wins = beats(move1, move2)
-        self.p1.learn(move1, move2)
-        self.p2.learn(move2, move1)
         if move1 == move2:
             print("It is a tie!\n")
         elif player1_wins:
@@ -62,12 +69,14 @@ class Game:
         else:
             self.score2 += 1
             print(f"Player 2 wins round, score: {self.score1} - {self.score2} \n")
+        self.p1.learn(move1, move2)
+        self.p2.learn(move2, move1)
 
     def play_game(self, num_rounds):
         print("Game start!")
         for round in range(num_rounds): 
             print(f"Round {round+1}...")   # rounds start from 1
-            self.play_round()
+            self.play_round()   
         if self.score1 == self.score2:
             print("The game is a tie!")
         elif self.score1 > self.score2:
