@@ -41,22 +41,16 @@ def beats(one, two):
 
 class ReflectPlayer(Player):
     def __init__(self):
-        self.reflect_move = "rock"
-
-    def move(self):
-        return self.reflect_move
-
-    def learn(self, my_move, their_move):
-        self.reflect_move = their_move
-
-
-class CyclePlayer(Player):
-    def __init__(self):
         self.new_move = "rock"
 
     def move(self):
         return self.new_move
 
+    def learn(self, my_move, their_move):
+        self.new_move = their_move
+
+
+class CyclePlayer(ReflectPlayer):
     def learn(self, my_move, their_move):
         if my_move == "rock":
             self.new_move = "paper"
