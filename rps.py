@@ -79,4 +79,5 @@ class Game:
 
 if __name__ == '__main__':
     game = Game(HumanPlayer(), RandomPlayer())
-    game.play_game(3)  # choose number of rounds
+    rounds = int(input("Choose number of rounds: "))
+    game.play_game(rounds)  # choose number of rounds
