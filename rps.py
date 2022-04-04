@@ -17,9 +17,11 @@ class Player:
     def learn(self, my_move, their_move):
         pass
 
+
 class RandomPlayer(Player):
     def move(self):
         return random.choice(moves)
+
 
 class HumanPlayer(Player):
     def move(self):
@@ -42,8 +44,8 @@ class ReflectPlayer(Player):
         self.reflect_move = "rock"
 
     def move(self):
-        return self.reflect_move 
-        
+        return self.reflect_move
+
     def learn(self, my_move, their_move):
         self.reflect_move = their_move
 
@@ -51,7 +53,7 @@ class ReflectPlayer(Player):
 class CyclePlayer(Player):
     def __init__(self):
         self.new_move = "rock"
-    
+
     def move(self):
         return self.new_move
 
@@ -62,6 +64,8 @@ class CyclePlayer(Player):
             self.new_move = "scissors"
         else:
             self.new_move = "rock"
+
+
 class Game:
     def __init__(self, p1, p2):
         self.p1 = p1
@@ -78,18 +82,20 @@ class Game:
             print("It is a tie!\n")
         elif player1_wins:
             self.score1 += 1
-            print(f"Player 1 wins round, score: {self.score1} - {self.score2} \n")
+            print("Player 1 wins round, score: "
+                  f"{self.score1} - {self.score2} \n")
         else:
             self.score2 += 1
-            print(f"Player 2 wins round, score: {self.score1} - {self.score2} \n")
+            print("Player 2 wins round, score: "
+                  f"{self.score1} - {self.score2} \n")
         self.p1.learn(move1, move2)
         self.p2.learn(move2, move1)
 
     def play_game(self, num_rounds):
         print("Game start!")
-        for round in range(num_rounds): 
+        for round in range(num_rounds):
             print(f"Round {round+1}...")   # rounds start from 1
-            self.play_round()   
+            self.play_round()
         if self.score1 == self.score2:
             print("The game is a tie!")
         elif self.score1 > self.score2:
