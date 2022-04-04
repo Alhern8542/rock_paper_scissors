@@ -11,11 +11,13 @@ in this game"""
 
 
 class Player:
-    def move(self):
-        return 'rock'
-
     def learn(self, my_move, their_move):
         pass
+
+
+class RockPlayer(Player):
+    def move(self):
+        return 'rock'
 
 
 class RandomPlayer(Player):
@@ -23,14 +25,19 @@ class RandomPlayer(Player):
         return random.choice(moves)
 
 
+def valid_input(string, options):
+    while True:
+        word = input(string).lower()
+        if word in options:
+            return word
+        else:
+            print("Invalid choice, try again")
+
+
 class HumanPlayer(Player):
     def move(self):
-        while True:
-            word = input("choose rock, paper, or scissors:\n").lower()
-            if word in ["rock", "paper", "scissors"]:
-                return word
-            else:
-                print("Invalid choice, try again")
+        return valid_input("choose rock, paper, or "
+                           "scissors:\n", ["rock", "paper", "scissors"])
 
 
 def beats(one, two):
@@ -100,6 +107,6 @@ class Game:
 
 
 if __name__ == '__main__':
-    game = Game(HumanPlayer(), RandomPlayer())
+    game = Game(HumanPlayer(), CyclePlayer())
     rounds = int(input("Choose number of rounds: "))
     game.play_game(rounds)  # choose number of rounds
