@@ -48,7 +48,20 @@ class ReflectPlayer(Player):
         self.reflect_move = their_move
 
 
-#class CyclePlayer(Player):
+class CyclePlayer(Player):
+    def __init__(self):
+        self.new_move = "rock"
+    
+    def move(self):
+        return self.new_move
+
+    def learn(self, my_move, their_move):
+        if my_move == "rock":
+            self.new_move = "paper"
+        elif my_move == "paper":
+            self.new_move = "scissors"
+        else:
+            self.new_move = "rock"
 class Game:
     def __init__(self, p1, p2):
         self.p1 = p1
