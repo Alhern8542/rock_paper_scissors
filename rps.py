@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import numbers
 import random
 
 """This program plays a game of Rock, Paper, Scissors between two Players,
@@ -41,7 +40,7 @@ class HumanPlayer(Player):
                            "scissors:\n", ["rock", "paper", "scissors"])
 
 
-def beats(one, two):
+def beats(one, two):  # players choices are compared for player one win
     return ((one == 'rock' and two == 'scissors') or
             (one == 'scissors' and two == 'paper') or
             (one == 'paper' and two == 'rock'))
@@ -107,8 +106,25 @@ class Game:
         print(f"Final score: {self.score1} - {self.score2}\nGame over!")
 
 
-if __name__ == '__main__':
-    game = Game(HumanPlayer(), CyclePlayer())
-    # rounds = int(input("Choose number of rounds: "))
-    rounds = int(valid_input("Choose number of rounds(1-7): ", ["1", "2", "3", "4", "5", "6", "7"]))
+def choose_opponent():
+    opponent = {
+        "1": RockPlayer(),
+        "2": RandomPlayer(),
+        "3": CyclePlayer(),
+        "4": ReflectPlayer()}
+    key = valid_input("Select opponent type:\n"
+                      "1- Rock Player\n2- Random Player\n"
+                      "3- Cycle Player\n"
+                      "4- Reflect Player\n", ["1", "2", "3", "4"])
+    return Game(HumanPlayer(), opponent[key])
+
+
+def play():
+    game = choose_opponent()
+    rounds = int(valid_input("Choose number of rounds(1-7)"
+                             ": ", ["1", "2", "3", "4", "5", "6", "7"]))
     game.play_game(rounds)  # choose number of rounds
+
+
+if __name__ == '__main__':
+    play()
